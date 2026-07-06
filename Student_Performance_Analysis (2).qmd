@@ -1,0 +1,401 @@
+---
+title: "STAT5020 Assignment 2 Part 1"
+author: "VIKTOR NGO"
+format: pdf
+editor: visual
+---
+
+# Introduction
+
+The data is analysed in this report to demonstrate the necessary information of high school students, which contains 2392 data records, 15 data variables, and 5 types of information, including demographics, study habits, parental involvement, extracurricular activities, and academic performance.
+
+The purpose of this report is to explore the characteristics of the dataset and investigate relationships between variables that may influence students’ academic performance.
+
+Summary statistics and visualisations are used to describe key patterns in the data, with appropriate treatment of variable types, including converting encoded categorical variables (such as GradeClass) into factors for analysis. In addition, GPA values are rounded to 2 decimal places, while GradeClass proportions are reported to 3 decimal places to ensure accuracy in presentation.
+
+The findings of this report aim to provide insights that may support educators and schools in understanding factors associated with student performance.
+
+## Part 1: Understanding the Data
+
+### 1. Variable Types.
+
+| Variable | Data Type | Justification |
+|------------------------|------------------------|------------------------|
+| Age | Discrete numerical | Age is collected as integer values between 15 and 18. Therefore, it takes only countable (discrete) values. |
+| Gender | Categorical nominal | Gender is represented as categories (0 = Male, 1 = Female) with no natural order. |
+| StudyTimeWeekly | Continuous numerical | Study time can take any value within a continuous range between 0 and 20 hours, including decimals. |
+| Absences | Discrete numerical | Absences are counts of missed days. Therefore, this column takes only integer values between 0 and 30. |
+| GPA | Continuous numerical | GPA is measured on a continuous scale and can take any decimal values within the range (0, 4). |
+| GradeClass | Categorical ordinal | Although GradeClass is stored in numerical values (0.0, 1.0, 2.0, 3.0, 4.0), these values represent ordered grade categories (A \> B \> C \> D \> F) after encoding, indicating a natural ranking of academic performance rather than true numerical quantities. |
+
+#### Note
+
+In this dataset, some variables are encoded as numbers but represent categorical data, including Gender and GradeClass. In later analysis, these should be treated as categorical variables for analysis and visualisation rather than numerical values.
+
+### 2. Research Question.
+
+#### Research Question
+
+Do students with higher weekly study time (StudyTimeWeekly) have higher GPA?
+
+#### Motivation
+
+The main purpose of this proposed research question is to investigate the relationship between weekly study time (StudyTimeWeekly) and academic performance measured by GPA, and to identify whether increased study effort is associated with better outcomes.
+
+These insights from this investigation may be helpful for students in improving study strategies, and balancing time for socialising and networking activities. Additionally, it also helps teachers and tutors provide more targeted academic support for students, including consultation sessions.
+
+## Part 2: One-variable Analysis
+
+### Loading data
+
+```{r}
+student_data <- read.csv("Student_Performance_Data.csv")
+```
+
+### 1. Grade Class
+
+#### Frequency Table
+
+```{r}
+student_data$GradeClassF <- factor(student_data$GradeClass,
+                                   levels = c(0,1,2,3,4),
+                                   labels = c("A","B","C","D","F"))
+
+freq <- table(student_data$GradeClassF)
+prop <- prop.table(freq)
+
+data.frame(
+  Grade = names(freq),
+  Frequency = as.numeric(freq),
+  Percentage = round(100 * as.numeric(prop), 2)
+)
+```
+
+```{r}
+barplot(table(student_data$GradeClassF),
+        main  = "Distribution of Student Grade Classes",
+        xlab  = "Grade",
+        ylab  = "Frequency",
+        col   = "steelblue",
+        border= "white")
+       
+```
+
+#### Interpretation
+
+The distribution of student grade classes and the frequency table show that the most common category is F, with 1211 students, while the least common category is A, with 107 students.
+
+The frequency generally increases from A to D, with a particularly large increase in Grade F, indicating that the majority of students fall into lower academic performance categories.
+
+Additionally, Grade C and Grade D have relatively higher frequencies compared to Grade A and Grade B.
+
+Furthermore, the distribution is more concentrated in lower grade categories , suggesting that a large proportion of students are not achieving high grades.
+
+Therefore, the current performance of most students may indicate a need for additional academic support from teachers, tutors, and the school to help them improve their academic outcomes.
+
+### 2. GPA
+
+#### Histogram
+
+```{r}
+png("histogram_gpa.png", width = 1000, height = 800)
+hist(student_data$GPA,
+     main       = "Distribution of GPA",
+     xlab       = "GPA Score",
+     ylab       = "Number of Students ",
+     col        = "steelblue",
+     border     = "white")
+dev.off()
+```
+
+#### Mean & Standard Deviation
+
+```{r}
+mean(student_data$GPA)
+sd(student_data$GPA)
+```
+
+#### Median & IQR
+
+```{r}
+median(student_data$GPA)
+IQR(student_data$GPA)
+```
+
+#### Summary Statistics
+
+```{r}
+summary(student_data$GPA)
+```
+
+```{r}
+data.frame(
+          Mean   = round(mean(student_data$GPA),2),
+          SD     = round(sd(student_data$GPA), 2),
+          Median = round(median(student_data$GPA), 2),
+          IQR    = round(IQR(student_data$GPA), 2))
+```
+
+#### Boxplot of GPA and 1.5×IQR Outlier Detection
+
+```{r}
+png("boxplot_gpa.png", width = 1000, height = 800)
+
+boxplot(student_data$GPA,
+        main = "Boxplot of GPA",
+        ylab = "GPA",
+        col = "steelblue")
+
+dev.off()
+```
+
+```{r}
+Q1 <- quantile(student_data$GPA, 0.25)
+Q3 <- quantile(student_data$GPA, 0.75)
+IQR_val <- IQR(student_data$GPA)
+
+lower <- Q1 - 1.5 * IQR_val
+upper <- Q3 + 1.5 * IQR_val
+
+lower
+upper
+
+boxplot.stats(student_data$GPA)$out
+```
+
+#### **Discussion**
+
+The histogram indicates that the distribution of GPA is approximately symmetric and reasonably close to a normal distribution, with the majority of values concentrated in the centre.
+
+There is no clear evidence of outliers, as shown in the boxplot, and this is also supported by the 1.5\*IQR rule, as no values fall outside the calculated upper and lower bounds.
+
+Additionally, the mean (1.91) and the median (1.89) are very close, which supports the conclusion that the distribution of GPA is relatively symmetric.
+
+Furthermore, the spread of the data is moderate, which is supported by the standard deviation (0.92) and IQR value (1.45).
+
+Therefore, the mean and standard deviation are more appropriate measures to summarise the spread of GPA.
+
+Overall, the distribution suggests that students' academic performance is fairly balanced without extreme values.
+
+## Part 3. Relationship between Variables.
+
+### Relationship between Grade vs Tutoring
+
+#### Factor Conversion
+
+```{r}
+student_data$TutoringF <- factor(student_data$Tutoring,
+                                 level = c(0, 1),
+                                 labels = c("No","Yes"))
+```
+
+#### Contingency Table
+
+```{r}
+table(student_data$TutoringF,student_data$GradeClassF)
+```
+
+#### Conditional proportions
+
+```{r}
+round(prop.table(table(student_data$TutoringF, student_data$GradeClassF), margin=1), 3)
+```
+
+#### Grade Distribution by Tutoring
+
+```{r}
+png("grade_distribution_by_tutoring.png", width = 1000, height = 800)
+barplot(prop.table(table(student_data$TutoringF, student_data$GradeClassF), 1),
+        beside = TRUE,
+        col = c("grey70", "steelblue"),
+        legend.text = TRUE,
+        args.legend = list(title = "Tutoring", x = "top", horiz = TRUE),
+        main = "Grade Distribution by Tutoring",
+        xlab = "Grade",
+        ylab = "Proportion")
+dev.off()
+```
+
+**Interpretation:**
+
+The contingency table, conditional proportions, and the distribution of grade class show some differences between students who received tutoring and those who did not.
+
+On the one hand, students who received tutoring have slightly higher proportions of higher grades, with around 7.2% of tutored students receiving an A grade compared with 3.3% of the non-tutored group, and 15.1% of tutored students achieving B grades compared to 9.6% of the non-tutored group.
+
+On the other hand, the proportion of students who received an F grade in the non-tutoring group is 52.8%, compared to 45.6% in the tutored group.
+
+However, the differences between students who receive grades A, B, C, D, and F in the tutoring and non-tutoring groups are relatively small, indicating that the relationship between tutoring and grade outcomes is not strong.
+
+Therefore, tutoring appears to be associated with slightly better grade outcomes, but the effect is limited.
+
+#### GPA across Tutoring Group
+
+```{r}
+png("gpa_by_tutoring.png", width = 1000, height = 800)
+boxplot(GPA ~ TutoringF,
+        data = student_data,
+        col = c("grey70", "steelblue"),
+        main = "GPA by Tutoring Status",
+        xlab = "Tutoring",
+        ylab = "GPA")
+dev.off()
+```
+
+#### 2. Centre and Spread
+
+```{r}
+result <- tapply(student_data$GPA, student_data$TutoringF, function(x) {
+  c(
+    Min = min(x),
+    Q1 = quantile(x, 0.25),
+    Median = median(x),
+    Mean = mean(x),
+    Q3 = quantile(x, 0.75),
+    Max = max(x),
+    IQR = IQR(x)
+  )
+})
+
+# Convert to table format
+result <- do.call(rbind, result)
+
+result
+```
+
+**Interpretation:**
+
+The boxplot and numerical summary show that students who receive tutoring tend to achieve higher GPA values compared to those who do not.
+
+The mean GPA of students who received tutoring is 2.108, which is higher than 1.819 for students who did not receive tutoring, and the median GPA shows a similar pattern.
+
+Furthermore, the spread of GPA values is quite similar between the two groups, as the interquartile ranges are close to each other.
+
+Hence, the overall shape of the GPA distribution appears similar for both tutoring and non-tutoring groups, with no major differences in variability.
+
+In conclusion, tutoring tends to be associated with higher GPA, but the effect is moderate rather than strongly positive.
+
+### Part 4. Normal Distribution and Probability
+
+#### 4.1 Assess normality
+
+```{r}
+library(ggplot2)
+
+png("gpa_normal_curve.png", width = 1000, height = 800)
+ggplot(student_data, aes(x = GPA)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 binwidth = 0.4,   
+                 boundary = 0,      
+                 fill = "steelblue",
+                 colour = "white") +
+  stat_function(fun = dnorm,
+                args = list(mean = mean(student_data$GPA),
+                            sd = sd(student_data$GPA)),
+                colour = "grey70",
+                linewidth = 1.2) +
+  labs(
+        title = "Distribution of GPA with Normal Curve",
+            x = "GPA",
+            y = "Density") +
+  coord_cartesian(xlim = c(0, 4)) +   theme_minimal() +
+  theme(plot.title = element_text(face = "bold"),
+        axis.title = element_text(face = "bold"))
+dev.off()
+```
+
+#### Q-Q Plot of GPA
+
+```{r}
+png("qqplot_gpa.png", width = 1000, height = 800)
+qqnorm(student_data$GPA,
+       main = "Normal Q-Q Plot of GPA",
+       col = "steelblue",
+       pch = 10)
+
+qqline(student_data$GPA,
+       col ="grey70",
+       lwd = 2)
+dev.off()
+```
+
+**Interpretation**
+
+From the histogram of GPA with the Normal curve, it can be seen that the GPA values have an approximately bell-shaped distribution, and the distribution appears approximately symmetric.
+
+Additionally, based on the overall shape of the distribution, the Normal curve fits the histogram reasonably well, particularly around the centre, and this conclusion is also supported by the Q-Q plot of GPA, where most points lie close to the reference line.
+
+Nevertheless, there are some deviations in the tails, indicating that the observed data does not perfectly follow a Normal distribution.
+
+In conclusion, it is reasonable to use a Normal model as an approximation for the GPA distribution, although it is not a perfect fit.
+
+#### 4.2 Probability Calculation
+
+##### Normal model
+
+```{r}
+pnorm(2.5, mean = mean(student_data$GPA), sd = sd(student_data$GPA))
+```
+
+##### Empirical proportion
+
+```{r}
+mean(student_data$GPA < 2.5)
+```
+
+##### The Difference
+
+```{r}
+pnorm(2.5, mean = mean(student_data$GPA), sd = sd(student_data$GPA))- mean(student_data$GPA < 2.5)
+```
+
+##### Interpretation
+
+Using the Normal model, the estimated probability of students having GPA values less than 2.5 is approximately 0.742, while based on the observed data, the empirical proportion of students having GPA values less than 2.5 is approximately 0.705.
+
+Both values are relatively close, with only a small difference of around 0.037 between the theoretical and empirical results.
+
+The main reason for this difference may be that the GPA distribution does not perfectly follow a Normal distribution, which is supported by slight deviations observed in the histogram and Q-Q plot.
+
+In summary, the Normal model provides a reasonable approximation for this probability, even though it slightly overestimates the proportion compared to the actual data.
+
+### 4.3 percentile cutoff
+
+#### Normal model cutoff of top 10%
+
+```{r}
+qnorm(0.9, mean(student_data$GPA), sd(student_data$GPA),
+      lower.tail = TRUE, 
+      log.p = FALSE)
+```
+
+#### Empirical cutoff from actual data
+
+```{r}
+quantile(student_data$GPA, 0.9)
+```
+
+#### The difference
+
+```{r}
+qnorm(0.9, mean(student_data$GPA), sd(student_data$GPA),
+      lower.tail = TRUE, 
+      log.p = FALSE) - quantile(student_data$GPA, 0.9)
+```
+
+#### Interpretation
+
+Using the Normal model, the GPA cutoff for the top 10% of students is approximately 3.079, which means students who have GPA above 3.079 are considered to be in top 10% of academic performance under the Normal model.
+
+Based on observed data records, the empirical 90th percentile of GPA values is approximately 3.132.
+
+Both values from empirical and theoretical perspectives are relatively close, with the empirical value slightly higher compared to the Normal model result.
+
+To conclude, it is reasonable to use Normal model for estimating the top 10% GPA values cutoff, although it slightly underestimates the cut off compared to the actual data, possibly because the distribution of GPA values is not perfectly normal, as shown in the histogram and Q-Q plot.
+
+# Conclusion
+
+Overall, the results suggest that study behaviour and tutoring have some impact on student performance, but the effects are not strong. GPA follows a roughly symmetric pattern, so using a Normal model is reasonable for estimation, even though it is not perfect.
+
+Tutoring is linked to slightly better outcomes, but the difference is small, which suggests that improving the quality of tutoring may be more important than simply increasing participation.
+
+These findings can help schools and teachers better understand student performance and make more informed decisions when providing academic support.
