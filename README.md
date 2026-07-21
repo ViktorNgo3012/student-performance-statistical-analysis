@@ -2,8 +2,7 @@
 
 An exploratory statistical analysis of a high school student performance dataset using **R** and **Quarto**.
 
-This project investigates academic performance through descriptive statistics, data visualisation and introductory probability modelling. The analysis explores how demographic characteristics, study habits and tutoring relate to student outcomes while demonstrating a reproducible statistical workflow using R.
-
+This project applies descriptive statistics, exploratory data analysis (EDA), and introductory probability modelling to investigate patterns in academic performance across **2,392 students**. The analysis examines how demographic characteristics, study habits, and tutoring participation are associated with GPA and grade outcomes while demonstrating a reproducible statistical workflow in R.
 ---
 
 ## Project Overview
@@ -16,7 +15,7 @@ This project analyses a dataset containing **2,392 high school students** and **
 - Extracurricular activities
 - Academic performance
 
-The analysis combines descriptive statistics, exploratory data analysis (EDA), visualisation and Normal distribution modelling to better understand patterns within the dataset.
+The project combines descriptive statistics, exploratory data analysis (EDA), statistical visualisation, and Normal distribution modelling to identify patterns in student academic performance and demonstrate a reproducible statistical analysis workflow.
 
 ---
 
@@ -61,9 +60,10 @@ Probability & Percentile Analysis
 
 # Dataset
 
-**Observations:** 2,392 students
-
-**Variables:** 15
+| Attribute | Value |
+|-----------|-------|
+| Observations | 2,392 students |
+| Variables | 15 |
 
 ### Demographics
 
@@ -98,7 +98,7 @@ Probability & Percentile Analysis
 
 ---
 
-# Statistical Analysis
+# Analytical Methods
 
 The project includes:
 
@@ -170,8 +170,8 @@ including
 # Key Findings
 
 - GPA follows an approximately symmetric distribution with no extreme outliers under the 1.5 × IQR rule.
-- Students receiving tutoring generally achieved slightly higher GPA values than students who did not receive tutoring.
-- GPA can be reasonably approximated using a Normal distribution, although slight deviations occur in the tails.
+- Students who received tutoring generally exhibited slightly higher GPA values than those who did not receive tutoring.
+- The GPA distribution was reasonably approximated by a Normal model, although slight deviations were observed in both tails.
 - Theoretical probabilities from the Normal model were close to empirical probabilities observed in the dataset.
 
 ---
@@ -199,7 +199,6 @@ The boxplot indicates a moderate spread in GPA values and no observations were i
 ![Grade Distribution by Tutoring](images/grade_distribution_by_tutoring.png)
 
 Students who received tutoring showed slightly higher proportions of A and B grades and a lower proportion of F grades than students who did not receive tutoring. Although the differences are modest, the distribution suggests a positive association between tutoring participation and academic performance.
-
 ---
 
 ## Comparison of GPA by Tutoring Status
@@ -289,12 +288,23 @@ The rendered report is available in:
 
 Potential extensions of this project include:
 
-- Statistical hypothesis testing
-- Correlation analysis
-- Regression modelling
-- Interactive dashboards
-- Predictive modelling of academic performance
+- Investigating the relationship between weekly study time and GPA using correlation analysis.
+- Applying statistical hypothesis testing to compare student groups.
+- Developing regression models to identify factors associated with academic performance.
+- Creating an interactive dashboard for exploratory analysis.
+- Comparing multiple predictive models for GPA estimation.
 
+---
+
+## Project Outputs
+
+This repository contains:
+
+- A reproducible Quarto analysis (`student_performance_analysis.qmd`)
+- A rendered statistical report (`student_performance_analysis.pdf`)
+- The original dataset (`student_performance_data.csv`)
+- Supporting visualisations used throughout the analysis
+  
 ---
 
 # License
