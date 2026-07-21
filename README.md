@@ -1,61 +1,69 @@
 # Student Performance Statistical Analysis
 
-Statistical analysis of a high school student performance dataset using **R** and **Quarto** as part of **STAT5020 – Assignment 2 (Part 1)**.
+An exploratory statistical analysis of a high school student performance dataset using **R** and **Quarto**.
 
-This project explores student demographics, study habits, tutoring participation, and academic performance using descriptive statistics, data visualisation, and introductory probability concepts. The analysis follows the assignment requirements and demonstrates the application of fundamental statistical techniques for exploratory data analysis.
+This project investigates academic performance through descriptive statistics, data visualisation and introductory probability modelling. The analysis explores how demographic characteristics, study habits and tutoring relate to student outcomes while demonstrating a reproducible statistical workflow using R.
 
 ---
 
 ## Project Overview
 
-The analysis is based on a dataset containing **2,392 students** and **15 variables**, covering:
+This project analyses a dataset containing **2,392 high school students** and **15 variables** covering:
 
-- Demographic information
+- Demographic characteristics
 - Study habits
 - Parental involvement
 - Extracurricular activities
 - Academic performance
 
-The project investigates:
-
-- Variable types
-- Descriptive statistics
-- Distribution of GPA
-- Relationship between tutoring and academic performance
-- Normal distribution approximation
-- Probability calculations using the Normal model
-
-The analysis was completed using **R** and documented in **Quarto**, with the final report rendered as a PDF.
+The analysis combines descriptive statistics, exploratory data analysis (EDA), visualisation and Normal distribution modelling to better understand patterns within the dataset.
 
 ---
 
-## Repository Structure
+## Objectives
+
+The project was designed to:
+
+- Understand the structure and measurement types of variables
+- Explore the distribution of academic performance
+- Summarise categorical and numerical variables using descriptive statistics
+- Compare academic performance between tutoring groups
+- Assess whether GPA can be reasonably approximated using a Normal distribution
+- Compare theoretical probabilities with empirical observations
+
+---
+
+# Project Workflow
 
 ```
-student-performance-statistical-analysis/
-│
-├── images/
-│   ├── histogram_gpa.png
-│   ├── boxplot_gpa.png
-│   ├── grade_distribution_by_tutoring.png
-│   ├── gpa_by_tutoring.png
-│   ├── gpa_normal_curve.png
-│   └── qqplot_gpa.png
-│
-├── student_performance_analysis.qmd
-├── student_performance_analysis.pdf
-├── student_performance_data.csv
-├── README.md
-└── LICENSE
+Dataset
+      │
+      ▼
+Data Understanding
+      │
+      ▼
+Descriptive Statistics
+      │
+      ▼
+Exploratory Data Analysis
+      │
+      ▼
+Relationship Analysis
+      │
+      ▼
+Normal Distribution Assessment
+      │
+      ▼
+Probability & Percentile Analysis
 ```
 
 ---
 
-## Dataset
+# Dataset
 
-The dataset contains information for **2,392 high school students**.
+**Observations:** 2,392 students
 
-Variables include:
+**Variables:** 15
 
 ### Demographics
 
@@ -76,93 +84,149 @@ Variables include:
 
 ### Extracurricular Activities
 
-- Extracurricular Participation
 - Sports
 - Music
 - Volunteering
+- Extracurricular Participation
 
 ### Academic Performance
 
 - GPA
 - Grade Class
 
-The dataset was supplied as part of the STAT5020 assignment.
+> The dataset was provided for educational purposes.
 
 ---
 
-## Statistical Analysis
+# Statistical Analysis
 
-The project includes the following analyses.
+The project includes:
 
-### Part 1 – Understanding the Data
+## Data Understanding
 
-- Identification of variable types
-- Justification of measurement scales
-- Development of a research question
+- Variable classification
+- Measurement scales
+- Research question development
 
 ---
 
-### Part 2 – One-Variable Analysis
+## Descriptive Statistics
 
-Categorical analysis:
+Categorical variables
 
-- Frequency table
-- Percentage table
-- Bar chart
-- Distribution interpretation
+- Frequency tables
+- Percentage distributions
+- Bar charts
 
-Numerical analysis:
+Numerical variables
 
-- Histogram
 - Mean
-- Standard deviation
 - Median
+- Standard deviation
 - Interquartile range (IQR)
 - Summary statistics
-- Boxplot
-- 1.5 × IQR outlier assessment
+- Histograms
+- Boxplots
+- Outlier assessment using the 1.5 × IQR rule
 
 ---
 
-### Part 3 – Relationship Between Variables
+## Relationship Analysis
 
-Relationship between Tutoring and Grade Class:
+Comparison of tutoring participation and academic performance using
 
-- Contingency table
+- Contingency tables
 - Conditional proportions
-- Grouped bar chart
-- Interpretation
-
-Comparison of GPA by Tutoring status:
-
-- Boxplot
-- Comparison of centre
-- Comparison of spread
-- Summary statistics by tutoring group
+- Grouped bar charts
+- Boxplots
+- Summary statistics
 
 ---
 
-### Part 4 – Normal Distribution and Probability
+## Normal Distribution
 
-Assessment of GPA normality:
+Assessment of GPA using
 
-- Histogram with Normal curve
+- Histogram with Normal density curve
 - Normal Q-Q plot
 
-Probability analysis:
+---
 
-- Normal probability calculation
-- Empirical probability calculation
-- Comparison between theoretical and empirical probabilities
+## Probability Analysis
 
-Percentile analysis:
+Comparison between
 
-- Top 10% GPA cutoff using the Normal model
-- Empirical percentile comparison
+- Normal model probabilities
+- Empirical probabilities
+
+including
+
+- Probability estimation
+- Percentile estimation
+- Top 10% GPA cutoff
 
 ---
 
-## Tools and Technologies
+# Key Findings
+
+- GPA follows an approximately symmetric distribution with no extreme outliers under the 1.5 × IQR rule.
+- Students receiving tutoring generally achieved slightly higher GPA values than students who did not receive tutoring.
+- GPA can be reasonably approximated using a Normal distribution, although slight deviations occur in the tails.
+- Theoretical probabilities from the Normal model were close to empirical probabilities observed in the dataset.
+
+---
+
+# Visualisations
+
+## Distribution of GPA
+
+![Distribution of GPA](images/histogram_gpa.png)
+
+The histogram provides an overview of the GPA distribution and supports the assessment of symmetry and central tendency.
+
+---
+
+## GPA Boxplot
+
+![Boxplot of GPA](images/boxplot_gpa.png)
+
+The boxplot summarises the spread of GPA values and confirms that no observations were identified as outliers using the 1.5 × IQR rule.
+
+---
+
+## Grade Distribution by Tutoring
+
+![Grade Distribution by Tutoring](images/grade_distribution_by_tutoring.png)
+
+Grade distributions were compared between students who received tutoring and those who did not using conditional proportions.
+
+---
+
+## GPA by Tutoring
+
+![GPA by Tutoring](images/gpa_by_tutoring.png)
+
+Students receiving tutoring generally exhibited a slightly higher GPA distribution while maintaining a similar level of variability.
+
+---
+
+## GPA with Normal Distribution
+
+![Normal Distribution](images/gpa_normal_curve.png)
+
+The Normal density curve was overlaid on the GPA distribution to evaluate the suitability of a Normal approximation.
+
+---
+
+## Normal Q-Q Plot
+
+![Normal Q-Q Plot](images/qqplot_gpa.png)
+
+Most observations align closely with the theoretical Normal line, although mild deviations are visible in the tails.
+
+---
+
+# Tools & Technologies
 
 - R
 - Quarto
@@ -173,61 +237,77 @@ Percentile analysis:
 
 ---
 
-## Data Processing
+# Skills Demonstrated
 
-The original dataset was analysed as provided.
-
-No observations or variables were removed or modified.
-
-Encoded categorical variables (such as **GradeClass** and **Tutoring**) were converted to **factor variables within R** to support statistical analysis and visualisation.
-
-Numerical values presented in tables were rounded for reporting purposes only.
-
----
-
-## Key Learning Outcomes
-
-Through this project, I gained practical experience in:
-
-- Classifying variable types
-- Producing descriptive statistics
-- Creating statistical visualisations
-- Comparing categorical and numerical variables
-- Interpreting contingency tables
-- Assessing distributions using histograms and Q-Q plots
-- Applying the Normal distribution to probability estimation
-- Reporting statistical findings using Quarto
+- Exploratory Data Analysis (EDA)
+- Descriptive Statistics
+- Data Visualisation
+- Statistical Reporting
+- Probability Modelling
+- Normal Distribution Assessment
+- Reproducible Research using Quarto
+- Data Interpretation using R
 
 ---
 
-## Report
-
-The completed statistical analysis is available in:
+# Repository Structure
 
 ```
-student_performance_analysis.pdf
-```
+student-performance-statistical-analysis/
 
-The complete analysis workflow and reproducible R code are available in:
-
-```
-student_performance_analysis.qmd
+│
+├── images/
+│   ├── histogram_gpa.png
+│   ├── boxplot_gpa.png
+│   ├── grade_distribution_by_tutoring.png
+│   ├── gpa_by_tutoring.png
+│   ├── gpa_normal_curve.png
+│   └── qqplot_gpa.png
+│
+├── student_performance_analysis.qmd
+├── student_performance_analysis.pdf
+├── student_performance_data.csv
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## Licence
+# Reproducibility
 
-This repository is released under the MIT License.
+The complete analysis can be reproduced using:
+
+- `student_performance_analysis.qmd`
+
+The rendered report is available in:
+
+- `student_performance_analysis.pdf`
 
 ---
 
-## Author
+# Future Improvements
+
+Potential extensions of this project include:
+
+- Statistical hypothesis testing
+- Correlation analysis
+- Regression modelling
+- Interactive dashboards
+- Predictive modelling of academic performance
+
+---
+
+# License
+
+This project is released under the MIT License.
+
+---
+
+# Author
 
 **Viktor (Xuan Nam) Ngo**
 
 Master of Data Science  
 Adelaide University
 
-GitHub:
-https://github.com/ViktorNgo3012
+GitHub: https://github.com/ViktorNgo3012
