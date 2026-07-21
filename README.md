@@ -176,53 +176,53 @@ including
 
 ---
 
-# Visualisations
+# Key Visualisations and Findings
 
-## Distribution of GPA
+## Distribution of Student GPA
 
 ![Distribution of GPA](images/histogram_gpa.png)
 
-The histogram provides an overview of the GPA distribution and supports the assessment of symmetry and central tendency.
+The GPA distribution is approximately symmetric, with most students achieving GPAs between 1.0 and 3.0. The distribution shows no substantial skewness, suggesting that the mean provides a reasonable summary of central tendency and that GPA is suitable for further statistical modelling using a Normal approximation.
 
 ---
 
-## GPA Boxplot
+## Distribution and Spread of GPA
 
 ![Boxplot of GPA](images/boxplot_gpa.png)
 
-The boxplot summarises the spread of GPA values and confirms that no observations were identified as outliers using the 1.5 × IQR rule.
+The boxplot indicates a moderate spread in GPA values and no observations were identified as outliers using the 1.5 × IQR rule. The median lies close to the centre of the box, providing further evidence that the GPA distribution is reasonably symmetric.
 
 ---
 
-## Grade Distribution by Tutoring
+## Grade Distribution by Tutoring Participation
 
 ![Grade Distribution by Tutoring](images/grade_distribution_by_tutoring.png)
 
-Grade distributions were compared between students who received tutoring and those who did not using conditional proportions.
+Students who received tutoring showed slightly higher proportions of A and B grades and a lower proportion of F grades than students who did not receive tutoring. Although the differences are modest, the distribution suggests a positive association between tutoring participation and academic performance.
 
 ---
 
-## GPA by Tutoring
+## Comparison of GPA by Tutoring Status
 
 ![GPA by Tutoring](images/gpa_by_tutoring.png)
 
-Students receiving tutoring generally exhibited a slightly higher GPA distribution while maintaining a similar level of variability.
+Students who received tutoring achieved a higher median and mean GPA than those who did not receive tutoring, while both groups displayed similar variability. This suggests that tutoring is associated with slightly improved academic performance rather than substantial differences in GPA distribution.
 
 ---
 
-## GPA with Normal Distribution
+## Normal Distribution Fit for GPA
 
 ![Normal Distribution](images/gpa_normal_curve.png)
 
-The Normal density curve was overlaid on the GPA distribution to evaluate the suitability of a Normal approximation.
+The fitted Normal density closely follows the centre of the GPA distribution, indicating that a Normal model provides a reasonable approximation for the data. Minor deviations are visible near the lower and upper tails, suggesting the distribution is not perfectly Normal.
 
 ---
 
-## Normal Q-Q Plot
+## Normal Q-Q Plot for GPA
 
 ![Normal Q-Q Plot](images/qqplot_gpa.png)
 
-Most observations align closely with the theoretical Normal line, although mild deviations are visible in the tails.
+Most observations follow the theoretical Normal reference line, supporting the assumption of approximate Normality. Small deviations at both tails indicate departures from a perfect Normal distribution, which is consistent with the histogram and Normal density assessment.
 
 ---
 
